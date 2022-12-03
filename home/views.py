@@ -53,3 +53,25 @@ def signup(request):
 
 
     return render(request,'signup.html')
+
+
+class SearchView(BaseView):
+    def get(self,request):
+        query = request.GET.get('query')
+        if not query:
+            return redirect('/')
+        self.context['search_product'] = Product.objects.filter(name__icontains = query)
+        return render(request,'search.html',self.context)
+
+
+def about(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+    return render(request,'about-us.html')
+
+
+def category(request):
+    return render(request,'category.html')
+
+def product(request):
+    return render(request,'productpage.html')

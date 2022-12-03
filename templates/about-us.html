@@ -12,8 +12,8 @@
                </div>
                <div class="modal-body">
                   <ul>
-                     <li><a href="#"><img src="images/flag-up-1.png" alt="" /> United States</a></li>
-                     <li><a href="#"><img src="images/flag-up-2.png" alt="" /> France </a></li>
+                     <li><a href="#"><img src="{% static 'images/flag-up-1.png' %}" alt="" /> United States</a></li>
+                     <li><a href="#"><img src="{% static 'images/flag-up-2.png' %}" alt="" /> France </a></li>
                   </ul>
                </div>
             </div>
@@ -22,8 +22,8 @@
       <div id="sidebar" class="top-nav">
          <ul id="sidebar-nav" class="sidebar-nav">
             <li><a href="#">Help</a></li>
-            <li><a href="#">How it works</a></li>
-            <li><a href="#">Chamb for Business</a></li>
+            <li><a href="/works">How it works</a></li>
+            <li><a href="/aboutus">Chamb for Business</a></li>
          </ul>
       </div>
       <div class="main-template-about">
@@ -43,9 +43,9 @@
                         </p>
                      </div>
                      <div class="about-icons row">
-                        <div class="col-xs-4 wow fadeIn" data-wow-delay="0.0s"><img src="images/about-icon-1.png" alt=""/></div>
-                        <div class="col-xs-4 wow fadeIn" data-wow-delay="0.2s"><img src="images/about-icon-2.png" alt=""/></div>
-                        <div class="col-xs-4 wow fadeIn" data-wow-delay="0.4s"><img src="images/about-icon-3.png" alt=""/></div>
+                        <div class="col-xs-4 wow fadeIn" data-wow-delay="0.0s"><img src="{% static 'images/about-icon-1.png' %}" alt=""/></div>
+                        <div class="col-xs-4 wow fadeIn" data-wow-delay="0.2s"><img src="{% static 'images/about-icon-2.png' %}" alt=""/></div>
+                        <div class="col-xs-4 wow fadeIn" data-wow-delay="0.4s"><img src="{% static 'images/about-icon-3.png' %}" alt=""/></div>
                      </div>
                   </div>
                </div>
@@ -75,7 +75,7 @@
                               that helps discover and build profitable long-lasting networks amongst businesses around the world.
                            </p>
                         </div>
-                        <img class="wow fadeIn" src="images/mac-about.png" alt="" />
+                        <img class="wow fadeIn" src="{% static 'images/mac-about.png' %}" alt="" />
                      </div>
                   </div>
                </div>
@@ -113,9 +113,10 @@
                   <div class="col-lg-8 col-lg-offset-2">
                      <div class="blue-form">
                         <h2>Start a free account today</h2>
-                        <form class="form-inline">
-                           <input type="email" placeholder="Enter your e-mail" />
-                           <button type="submit" class="btn btn-primary">Continue</button>
+                        <form method="post">
+                           {% csrf_token %}
+                           <input name="email" type="email" placeholder="Enter your e-mail" />
+                           <button type = "submit" class="btn btn-primary">Submit</button>
                         </form>
                         <p>Easy setup - no payment fees - up to 100 products for free</p>
                         <div class="blue-form_question"><strong>Questions?</strong> Call us on 12 34 56 78 for help.</div>
@@ -133,14 +134,14 @@
                      <p>Chamb hails from the Bosporus strait straddling Istanbul. Taking cues from this continent and culture spanning city, we bring people and place together in new and unexpected ways. Chamb may have its roots firmly planted in Turkey, but gaze out across fertile lands of Europe and you’ll see its branches spreading a canopy of connection and possibility across the globe.</p>
                   </div>
                   <div class="col-lg-8 col-lg-offset-2 wow fadeIn" style="margin-bottom:15px;" data-wow-delay="0.2s">
-                     <img class="img-responsive" src="images/lag-60.png" alt="" />
+                     <img class="img-responsive" src="{% static 'images/lag-60.png' %}" alt="" />
                   </div>
                   <div class="col-lg-8 col-lg-offset-2">
                      <p>Chamb is the brainchild of Bayram Filikci. Danish born with Turkish descent, like the famously business savvy Ottomans of old, Bayram has a flair for creativity and business growth hacking. And along with Chamb’s team, we all count ourselves as passionate entrepreneurs who live for the sole purpose of finding solutions to your problems.</p>
                      <p>After gaining much experience in building business from scratch and nurturing them to fruition, the team set its sights on creating a gateway that could help fledgling companies establish new relationships that will propel them forward to unrivalled riches.</p>
                   </div>
                   <div class="col-lg-8 col-lg-offset-2 wow fadeIn" style="margin-bottom:15px;" data-wow-delay="0.2s">
-                     <img src="images/lag-61.png" alt="" />
+                     <img src="{% static 'images/lag-61.png' %}" alt="" />
                   </div>
                   <div class="col-lg-8 col-lg-offset-2">
                      <h2>The ball is now yours.</h2>
