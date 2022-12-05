@@ -7,6 +7,6 @@ urlpatterns =[
     path('works', Works.as_view(),name='works'),
     path('signup', signup, name='signup'),
     path('aboutus',about,name='aboutus'),
-    path('category',category,name='category'),
-    path('product',product,name='product'),
+    path('category',Categories.as_view(),name='category'),
+    path('products/<slug>',Products.as_view(),name='products'),
     ]

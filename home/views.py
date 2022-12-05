@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from .models import *
 from django.views.generic import View
 from .views import *
+from django.contrib.auth.models import User
+from django.contrib import messages
 
 # Create your views here.
 
@@ -25,8 +27,20 @@ class Works(BaseView):
         return render(request,'howitworks.html',self.context)
 
 
-from django.contrib.auth.models import User
-from django.contrib import messages
+
+class Categories(BaseView):
+    def get(self, request, slug):
+        self.context
+        ids = Category.objects.get(slug=slug).id
+        self.context['category'] = Product.objects.filter(category_id=ids)
+        return render(request, 'category.html', self.context)
+
+class Products(BaseView):
+    def get(self,request,slug):
+        self.context
+        self.context['products'] = Product.objects.filter(slug = slug)
+        return render(request, 'productpage.html', self.context)
+
 def signup(request):
     if request.method == 'POST':
         username= request.POST['username']
@@ -70,8 +84,5 @@ def about(request):
     return render(request,'about-us.html')
 
 
-def category(request):
-    return render(request,'category.html')
 
-def product(request):
-    return render(request,'productpage.html')
+
