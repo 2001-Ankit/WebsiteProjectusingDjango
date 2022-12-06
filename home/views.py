@@ -16,13 +16,14 @@ class HomeView(BaseView):
     def get(self,request):
         self.context['categories'] = Category.objects.all()
         self.context['countries'] = Country.objects.all()
-
+        self.context['products'] = Product.objects.all()
         return render(request, 'index.html', self.context)
 
 
 class Works(BaseView):
     def get(self,request):
         self.context['answers'] = Work.objects.all()
+        self.context['questions']= QnA.objects.all()
 
         return render(request,'howitworks.html',self.context)
 
@@ -38,7 +39,7 @@ class Categories(BaseView):
 class Products(BaseView):
     def get(self,request,slug):
         self.context
-        self.context['products'] = Product.objects.filter(slug = slug)
+        self.context['products'] = Product.objects.filter(slug=slug)
         return render(request, 'productpage.html', self.context)
 
 def signup(request):
@@ -84,5 +85,7 @@ def about(request):
     return render(request,'about-us.html')
 
 
+
+def add_wishlist(request,slug):
 
 

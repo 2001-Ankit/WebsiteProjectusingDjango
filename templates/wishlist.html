@@ -1,0 +1,57 @@
+   {% extends 'base.html' %}
+   {% block content %}
+   {%load static %}
+   <!-- Breadcrumb Start -->
+        <div class="breadcrumb-wrap">
+            <div class="container-fluid">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Products</a></li>
+                    <li class="breadcrumb-item active">Wishlist</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Breadcrumb End -->
+
+        <!-- Wishlist Start -->
+        <div class="wishlist-page">
+            <div class="container-fluid">
+                <div class="wishlist-page-inner">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Price</th>
+                                            <th>Add to Cart</th>
+                                            <th>Remove</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="align-middle">
+                                        {% for wish in WishLists %}
+                                        <tr>
+                                            <td>
+                                                <div class="img">
+                                                    <a href="/product"><img src="{{wish.items.image.url}}" alt="Image"></a>
+                                                    <p>{{wish.items.pname}}</p>
+                                                </div>
+                                            </td>
+                                            <td>${{wish.price}}</td>
+
+                                            <td> <a href = "{% url 'add-to-cart' wish.slug %}"><button class = "btn-cart">Add to Cart</button></a></td>
+                                            <td><button onclick="location.href = '/delete-wishlist/{{wish.slug}}'"><i class="fa fa-trash"></i></button></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Wishlist End -->
+
+     {% endblock %}

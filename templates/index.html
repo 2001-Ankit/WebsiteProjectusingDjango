@@ -50,7 +50,7 @@
                            </div>
                         </div>
                         <div class="col-sm-3">
-                           <div class="form-sh"> <a class="btn" href="#">Search</a> </div>
+                           <div class="form-sh"> <a class="btn" href="/search">Search</a> </div>
                         </div>
                         <p>Or simply<a href="#"> click here </a> and get inspired!</p>
                      </div>
@@ -224,20 +224,20 @@
       <div class="products">
          <div class="main-products">
             <h2>TRENDING PRODUCTS ON CHAMB</h2>
-            <div class="product-slidr">
+            <div class="product-slider">
                <div class="slider">
                   {% for product in products %}
                   <div>
                      <div class="prod-box">
                         <div class="prod-i">
-                           <img src="{{product.image}}" alt="#" />
+                           <img src="{{product.image}}" />
                         </div>
                         <div class="prod-dit clearfix">
                            <div class="dit-t clearfix">
                               <div class="left-ti">
                                  <h4>{{product.name}}</h4>
                               </div>
-                              <a href="#">{{product.price}}</a>
+                              <a href="/products/{{product.slug}}">${{product.price}}</a>
                            </div>
                            <div class="dit-btn clearfix">
                               <a class="wis" href="#"><i class="fa fa-star" aria-hidden="true"></i> Save to wishlist </a>

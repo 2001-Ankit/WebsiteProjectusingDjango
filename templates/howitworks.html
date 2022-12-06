@@ -258,23 +258,24 @@
             <div class="row">
                <div class="faq-main-box">
                   <h2>Questions and answers</h2>
-
+               {% for q in questions %}
                   <div class="col-md-6 col-sm-6 col-xs-12">
                      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                         <div class="panel panel-default">
                            <div class="panel-heading" role="tab" id="heading-faq-1">
                               <h4 class="panel-title">
                                  <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#faq-a" aria-expanded="true" aria-controls="faq-a">
-
+                              {{q.question}}
                                  </a>
                               </h4>
                            </div>
                            <div id="faq-a" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-faq-1">
-                              <div class="panel-body"></div>
+                              <div class="panel-body">{{q.answer}}</div>
                            </div>
                         </div>
                      </div>
                   </div>
+                  {% endfor %}
 
                </div>
             </div>
