@@ -154,6 +154,7 @@ def delete_cart(request,slug):
 
 
 def wishlist(request,slug):
+
     if Product.objects.filter(slug=slug).exists():
         item = Product.objects.get(slug=slug)
         if not Wishlist.objects.filter(slug=slug,user=request.user).exists():
@@ -176,3 +177,5 @@ def wishlist(request,slug):
         messages.error(request, 'Selected Product Not Found')
 
     return redirect(request.META.get('HTTP_REFERER'))
+
+
