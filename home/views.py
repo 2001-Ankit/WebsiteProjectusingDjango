@@ -85,7 +85,94 @@ def about(request):
     return render(request,'about-us.html')
 
 
+class CartView(BaseView):
 
-def add_wishlist(request,slug):
+    def get(self,request):
+        self.context
+        username = request.user.username
+        self.context['cart_views'] = Cart.objects.filter(username = username, checkout = False)
+        return render(request,'cart.html',self.context)
 
 
+def add_to_cart(request,slug):
+    username = request.user.username
+    if Cart.objects.filter(slug=slug, username=username, checkout=False).exists():
+        quantity = Cart.objects.get(slug=slug, username=username,checkout=False).quantity
+        price = Product.objects.get(slug=slug).price
+        discounted_price = Product.objects.get(slug=slug).discounted_price
+
+        if discounted_price > 0:
+            original_price = discounted_price
+        else:
+            original_price = price
+
+        quantity = quantity + 1
+        total = quantity * original_price
+        Cart.objects.filter(slug = slug, username = username).update(quantity = quantity, total=total)
+        return redirect('/')
+
+    else:
+        price = Product.objects.get(slug=slug).price
+        discounted_price = Product.objects.get(slug=slug).discounted_price
+
+        if discounted_price > 0:
+            original_price = discounted_price
+        else:
+            original_price = price
+        data = Cart.objects.create(slug=slug,
+                            username=username,
+                            total=original_price,
+                            items = Product.objects.filter(slug = slug)[0]
+                            )
+
+        data.save()
+        return redirect('/')
+
+
+def remove_cart(request,slug):
+    username = request.user.username
+    if Cart.objects.filter(slug=slug, username=username, checkout=False).exists():
+        quantity = Cart.objects.get(slug=slug, username=username, checkout=False).quantity
+        price = Product.objects.get(slug=slug).price
+        discounted_price = Product.objects.get(slug=slug).discounted_price
+
+        if discounted_price > 0:
+            original_price = discounted_price
+        else:
+            original_price = price
+        if quantity > 1:
+            quantity = quantity - 1
+        total = quantity * original_price
+        Cart.objects.filter(slug=slug, username=username).update(quantity=quantity, total=total)
+        return redirect('/')
+
+
+def delete_cart(request,slug):
+    username = request.user.username
+    Cart.objects.filter(slug = slug, username=username ,checkout= False).delete()
+    return redirect('/')
+
+
+def wishlist(request,slug):
+    if Product.objects.filter(slug=slug).exists():
+        item = Product.objects.get(slug=slug)
+        if not Wishlist.objects.filter(slug=slug,user=request.user).exists():
+
+            price = item.price
+            wishlist_object = Wishlist.objects.create(
+                user=request.user,
+                slug=slug,
+                items = item,
+                price = price,
+
+            )
+            wishlist_object.save()
+            messages.success(request, f'{item.name} added to your wishlist')
+
+        else:
+            messages.info(request, f'{item.name} already added to your wishlist')
+
+    else:
+        messages.error(request, 'Selected Product Not Found')
+
+    return redirect(request.META.get('HTTP_REFERER'))

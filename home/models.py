@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from .
+
 
 # Create your models here.
 class Category(models.Model):
@@ -48,11 +48,24 @@ class QnA(models.Model):
     def __str__(self):
         return self.name
 
-class Wishlist(models.Model):
-user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)# here CASCADE is the behavior to adopt when the referenced object(because it is a foreign key) is deleted. it is not specific to django,this is an sql standard.
-wished_item = models.ForeignKey(Item,on_delete=models.CASCADE)
-slug = models.CharField(max_length=30,null=True,blank=True)
-added_date = models.DateTimeField(auto_now_add=True)
+class Cart(models.Model):
+    username = models.CharField(max_length=400)
+    slug = models.CharField(max_length=500)
+    items = models.ForeignKey(Product,on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    total = models.IntegerField()
+    checkout = models.BooleanField(default=False)
 
-def __str__(self):
-    return self.wished_item.title
+    def __str__(self):
+        return self.username
+
+
+class Wishlist(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    items = models.ForeignKey(Product, on_delete = models.CASCADE)
+    slug = models.CharField(max_length = 400)
+    price = models.IntegerField()
+
+    def __str__(self):
+        return f"< {self.user.username}  : {self.items.name} >"
+

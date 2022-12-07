@@ -42,8 +42,37 @@
                         </div>
                      </form>
                   </div>
-
+                  {% if user.is_authenticated %}
                   <div class="col-md-8 col-sm-12">
+                     <div class="right-nav">
+                        <div class="login-sr">
+                           <div class="login-signup">
+                              <ul>
+                                 <li><a href="#">{{user.username}}</a></li>
+                                 <li><a class="custom-b" href="/account/logout">Logout</a></li>
+                              </ul>
+                           </div>
+                        </div>
+                        <div class="help-r hidden-xs">
+                           <div class="help-box">
+                              <ul>
+                                 <li> <a data-toggle="modal" data-target="#myModal" href="#"> <span>Change</span> <img src="images/flag.png" alt="" /> </a> </li>
+                                 <li> <a href="#"><img class="h-i" src="images/help-icon.png" alt="" /> Help </a> </li>
+                              </ul>
+                           </div>
+                        </div>
+                        <div class="nav-b hidden-xs">
+                           <div class="nav-box">
+                              <ul>
+                                 <li><a href="/works">How it works</a></li>
+                                 <li><a href="/aboutus">Chamb for Business</a></li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  {% else %}
+                   <div class="col-md-8 col-sm-12">
                      <div class="right-nav">
                         <div class="login-sr">
                            <div class="login-signup">
@@ -71,6 +100,7 @@
                         </div>
                      </div>
                   </div>
+                  {% endif %}
 
                </div>
             </div>
